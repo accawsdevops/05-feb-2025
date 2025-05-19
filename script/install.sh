@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo systemctl stop nginx   # It will stop the Nginx
+sudo systemctl stop nginx   # It will stop the Nginx..
 echo "Clearing old build files..."
 sudo rm -rf /usr/share/nginx/html/* # Remove old app files from nginx
 
