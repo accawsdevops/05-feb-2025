@@ -1,0 +1,59 @@
+To install the CodeDeploy agent on an Amazon EC2 instance running Amazon Linux, follow these steps:
+
+1. **Connect to your EC2 instance**:
+   Use SSH to connect to your instance. Replace `your-key.pem` with your key file and `ec2-user@your-instance-public-dns` with your instance's public DNS.
+
+   ```bash
+   ssh -i your-key.pem ec2-user@your-instance-public-dns
+   ```
+
+2. **Update the package repository**:
+   Update the package repository to ensure you have the latest package information.
+
+   ```bash
+   sudo yum update -y
+   ```
+
+3. **Install the CodeDeploy agent**:
+   You can install the CodeDeploy agent by using the following commands:
+
+   ```bash
+   sudo yum install -y ruby wget
+   ```
+
+   Then, download and install the CodeDeploy agent:
+
+   ```bash
+   cd /tmp
+   wget https://aws-codedeploy-us-west-2.s3.us-west-2.amazonaws.com/latest/install
+   chmod +x ./install
+   sudo ./install auto
+   ```
+
+   *(Make sure to replace the URL with the correct region if you're not using `us-west-2`.)*
+
+4. **Start the CodeDeploy agent**:
+   Start the CodeDeploy agent with the following command:
+
+   ```bash
+   sudo service codedeploy-agent start
+   ```
+
+5. **Enable the CodeDeploy agent to start on boot**:
+   To ensure the CodeDeploy agent starts on system boot, run:
+
+   ```bash
+   sudo systemctl enable codedeploy-agent
+   ```
+
+6. **Check the status of the CodeDeploy agent**:
+   You can verify that the agent is running by checking its status:
+
+   ```bash
+   sudo service codedeploy-agent status
+   ```
+
+7. **Firewall settings (if applicable)**:
+   Ensure that your instance's security group allows outbound access to the internet, as the CodeDeploy agent needs to communicate with the AWS CodeDeploy service.
+
+After completing these steps, your CodeDeploy agent should be up and running on your EC2 instance! If you encounter any issues, feel free to ask for help.
