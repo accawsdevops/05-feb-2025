@@ -1,26 +1,25 @@
-version: 0.2
+version: 0.2 # This is the reference from the devloper/DevOps Engineer
 
 phases:
   install:
     runtime-versions:
       nodejs: 22 # Set this to the Node.js version you need
     commands:
-      - echo Installing dependencies...
-      - npm install
+      - echo Installing Node.js in the install phase
+
+  pre_build:
+    commands:
+      - echo Installing npm for build generation
+      - npm install # To install NPM
 
   build:
     commands:
-      - echo Building the application...
-      - npm run build
-      - pwd
-      - echo Copying appspec.yml to build directory...
-      - cp appspec.yml build/  # Ensure appspec.yml is included in the build directory
-      - echo Copying scripts/ to build directory...
-      - cp -r script/ build/  # Ensure scripts are included in the build directory
+      - echo Creating the build
+      - npm run build # To Generate the Build
 
   post_build:
     commands:
-      - echo entering post build
+      - echo The build is complete
 
 artifacts:
   files:
